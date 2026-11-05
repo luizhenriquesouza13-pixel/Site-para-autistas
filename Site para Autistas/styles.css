@@ -1,0 +1,453 @@
+:root {
+  /* Cores vibrantes e chamativas (com alto contraste sensorial) */
+  --cor-fundo: #f4f6fb;
+  --cor-texto: #1a1d20;
+  --cor-texto-secundario: #4a5568;
+  --cor-primaria: #2563eb;         /* Azul vibrante principal */
+  --cor-primaria-hover: #1d4ed8;   /* Azul mais escuro ao passar o rato */
+  --cor-secundaria: #e0e7ff;       /* Azul claro suave para destaque */
+  --cor-borda: #cbd5e1;
+  --cor-foco: #059669;            /* Verde para indicar foco visual */
+  --cor-card: #ffffff;
+  
+  --fonte-principal: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+  --tamanho-fonte: 1.125rem; /* 18px */
+  --espacamento: 1.5rem;
+  --raio: 8px;
+  --transicao: 0.2s ease;
+}
+
+/* Modo Alto Contraste */
+body.alto-contraste {
+  --cor-fundo: #000000;
+  --cor-texto: #ffffff;
+  --cor-texto-secundario: #e0e0e0;
+  --cor-primaria: #ffff00;
+  --cor-primaria-hover: #ffff66;
+  --cor-secundaria: #1a1a1a;
+  --cor-borda: #ffffff;
+  --cor-foco: #ffff00;
+  --cor-card: #111111;
+}
+
+/* Modo Calmo (Escuro Suave) */
+body.modo-calmo {
+  --cor-fundo: #1c2321;
+  --cor-texto: #e0e6e4;
+  --cor-texto-secundario: #a3b18a;
+  --cor-primaria: #73a9ad;
+  --cor-primaria-hover: #90c8ac;
+  --cor-secundaria: #2b3a37;
+  --cor-borda: #3f524d;
+  --cor-card: #222e2b;
+  --cor-foco: #90c8ac;
+}
+
+/* Fonte Maior */
+body.fonte-maior {
+  --tamanho-fonte: 1.35rem;
+}
+
+/* Redução de Movimento */
+body.reducao-movimento *,
+body.reducao-movimento *::before,
+body.reducao-movimento *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  font-size: var(--tamanho-fonte);
+  line-height: 1.7;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  min-height: 100vh;
+}
+
+/* Destaque visual suave ao passar o rato nos parágrafos */
+p {
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--raio);
+  transition: background-color var(--transicao);
+}
+
+p:hover {
+  background-color: var(--cor-secundaria);
+}
+
+/* ============================================
+   GUIA DE LEITURA
+   ============================================ */
+.guia-leitura {
+  position: fixed;
+  left: 0;
+  top: -10px;
+  width: 100%;
+  height: 4px;
+  background-color: var(--cor-primaria);
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+body.guia-ativa .guia-leitura {
+  display: block;
+}
+
+/* ============================================
+   SKIP LINK E FOCO VISÍVEL
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--cor-primaria);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--raio);
+  z-index: 1000;
+  text-decoration: none;
+  font-weight: 700;
+  transition: top var(--transicao);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.secao {
+  padding: 3rem 0;
+}
+
+.secao-alternativa {
+  background-color: var(--cor-secundaria);
+  padding: 2rem;
+  border-radius: var(--raio);
+  margin: 2rem 0;
+}
+
+/* ============================================
+   CABEÇALHO E CONTROLES
+   ============================================ */
+.cabecalho {
+  background-color: var(--cor-card);
+  border-bottom: 2px solid var(--cor-borda);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cabecalho .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--cor-primaria);
+}
+
+.logo-icone {
+  font-size: 1.6rem;
+}
+
+.controles-acessibilidade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-controle {
+  background: var(--cor-secundaria);
+  border: 2px solid var(--cor-borda);
+  color: var(--cor-texto);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--raio);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--transicao), border-color var(--transicao);
+}
+
+.btn-controle:hover {
+  background: var(--cor-borda);
+}
+
+.btn-controle[aria-pressed="true"] {
+  background: var(--cor-primaria);
+  color: white;
+  border-color: var(--cor-primaria);
+}
+
+.navegacao ul {
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
+}
+
+.navegacao a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--cor-texto);
+  text-decoration: none;
+  border-radius: var(--raio);
+  font-weight: 500;
+  transition: background var(--transicao);
+}
+
+.navegacao a:hover {
+  background: var(--cor-secundaria);
+}
+
+/* ============================================
+   PREVISIBILIDADE E PAUSA
+   ============================================ */
+.info-previsibilidade {
+  background-color: var(--cor-card);
+  border: 2px solid var(--cor-borda);
+  border-left: 6px solid var(--cor-primaria);
+  border-radius: var(--raio);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.cartao-pausa {
+  background-color: var(--cor-secundaria);
+  border: 2px dashed var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icone-pausa {
+  font-size: 2rem;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.3;
+  margin-bottom: 1.25rem;
+  color: var(--cor-primaria);
+}
+
+.lead {
+  font-size: 1.2rem;
+  max-width: 42ch;
+  margin: 0 auto 2rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* ============================================
+   BOTÕES E CARDS
+   ============================================ */
+.btn-principal {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: white;
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--raio);
+  text-decoration: none;
+  font-weight: 700;
+  border: none;
+  font-family: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background var(--transicao);
+}
+
+.btn-principal:hover {
+  background: var(--cor-primaria-hover);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: var(--cor-card);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+}
+
+.card h3 {
+  color: var(--cor-primaria);
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.intro-secao {
+  margin-bottom: 1rem;
+  color: var(--cor-texto-secundario);
+  max-width: 50ch;
+}
+
+/* ============================================
+   FORMULÁRIO
+   ============================================ */
+.formulario {
+  max-width: 500px;
+  margin-top: 1.5rem;
+}
+
+.campo {
+  margin-bottom: 1.5rem;
+}
+
+.campo label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.obrigatorio {
+  font-weight: 400;
+  color: var(--cor-texto-secundario);
+  font-size: 0.9em;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--cor-card);
+  color: var(--cor-texto);
+  transition: border-color var(--transicao);
+}
+
+.campo input:hover,
+.campo textarea:hover {
+  border-color: var(--cor-primaria);
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.mensagem-ajuda {
+  display: block;
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+  color: var(--cor-texto-secundario);
+}
+
+.mensagem-sucesso {
+  background-color: var(--cor-secundaria);
+  border: 2px solid var(--cor-primaria);
+  color: var(--cor-texto);
+  padding: 1rem;
+  border-radius: var(--raio);
+  margin-top: 1.5rem;
+}
+
+/* ============================================
+   RODAPÉ
+   ============================================ */
+.rodape {
+  background: var(--cor-secundaria);
+  border-top: 2px solid var(--cor-borda);
+  padding: 2.5rem 0;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.rodape .pequeno {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-secundario);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  color: var(--cor-primaria);
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 768px) {
+  .controles-acessibilidade {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

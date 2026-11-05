@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apeperia - Portal Acessível</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Linha Guia de Leitura -->
+  <div class="guia-leitura" id="guia-leitura" aria-hidden="true"></div>
+
+  <!-- Atalho para saltar o menu e ir direto ao conteúdo -->
+  <a href="#conteudo-principal" class="skip-link">Ir para o conteúdo principal</a>
+
+  <header class="cabecalho">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icone" aria-hidden="true">🌱</span>
+        <span>Apeperia</span>
+      </div>
+
+      <!-- Controles de acessibilidade -->
+      <div class="controles-acessibilidade" role="region" aria-label="Controles de acessibilidade">
+        <button type="button" class="btn-controle" id="btn-contraste" aria-pressed="false">Alto Contraste</button>
+        <button type="button" class="btn-controle" id="btn-modo-calmo" aria-pressed="false">Modo Calmo</button>
+        <button type="button" class="btn-controle" id="btn-fonte" aria-pressed="false">Aumentar Fonte</button>
+        <button type="button" class="btn-controle" id="btn-movimento" aria-pressed="false">Reduzir Movimento</button>
+        <button type="button" class="btn-controle" id="btn-guia" aria-pressed="false">Guia de Leitura</button>
+      </div>
+
+      <nav class="navegacao" aria-label="Navegação principal">
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" class="container">
+    
+    <!-- Bloco de Previsibilidade -->
+    <div class="info-previsibilidade" role="region" aria-label="Informações e previsibilidade da página">
+      <span>⏱️ <strong>Tempo estimado de leitura:</strong> 3 minutos</span>
+      <span>📌 <strong>Conteúdo:</strong> Apresentação de recursos com textos simples e imagens estáticas (sem áudios ou vídeos automáticos).</span>
+    </div>
+
+    <!-- Seção Hero -->
+    <section class="hero" id="sobre">
+      <h1>Design Acessível e Confortável</h1>
+      <p class="lead">Uma interface desenvolvida com cores suaves e baixo estresse visual para proporcionar uma navegação calma, previsível e simples.</p>
+      <a href="#recursos" class="btn-principal">Explorar Recursos</a>
+    </section>
+
+    <!-- Cartão de Pausa -->
+    <aside class="cartao-pausa" role="note">
+      <span class="icone-pausa" aria-hidden="true">☕</span>
+      <div>
+        <strong>Precisa de uma pausa?</strong>
+        <p>O seu progresso não será perdido. Pode navegar ao seu ritmo ou fechar a página e voltar quando se sentir confortável.</p>
+      </div>
+    </aside>
+
+    <!-- Seção de Recursos -->
+    <section id="recursos" class="secao secao-alternativa">
+      <h2>Recursos e Boas Práticas</h2>
+      <p class="intro-secao">Conheça as diretrizes adotadas na construção desta página para evitar sobrecarga sensorial.</p>
+      
+      <div class="cards-grid">
+        <article class="card">
+          <h3>Cores Calmas</h3>
+          <p>Tons suaves e baixos níveis de brilho para evitar o incômodo causado pela luz direta da tela.</p>
+        </article>
+        <article class="card">
+          <h3>Animações Controladas</h3>
+          <p>Nenhum elemento pisca ou se move automaticamente sem o consentimento prévio do utilizador.</p>
+        </article>
+        <article class="card">
+          <h3>Linguagem Direta</h3>
+          <p>Textos claros e objetivos, organizados em parágrafos curtos para facilitar a compreensão.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="secao">
+      <h2>Entre em Contato</h2>
+      <form class="formulario" id="form-contato">
+        <div class="campo">
+          <label for="nome">Nome <span class="obrigatorio">(obrigatório)</span></label>
+          <input type="text" id="nome" name="nome" required aria-describedby="ajuda-nome">
+          <small id="ajuda-nome" class="mensagem-ajuda">Digite o nome como gostaria de ser chamado.</small>
+        </div>
+
+        <div class="campo">
+          <label for="email">E-mail <span class="obrigatorio">(obrigatório)</span></label>
+          <input type="email" id="email" name="email" required aria-describedby="ajuda-email">
+          <small id="ajuda-email" class="mensagem-ajuda">Usaremos o seu e-mail apenas para responder à sua mensagem.</small>
+        </div>
+
+        <div class="campo">
+          <label for="mensagem">Mensagem <span class="obrigatorio">(obrigatório)</span></label>
+          <textarea id="mensagem" name="mensagem" required aria-describedby="ajuda-mensagem"></textarea>
+          <small id="ajuda-mensagem" class="mensagem-ajuda">Escreva a sua dúvida ou sugestão de forma simples.</small>
+        </div>
+
+        <button type="submit" class="btn-principal">Enviar Mensagem</button>
+
+        <div class="mensagem-sucesso" id="mensagem-sucesso" tabindex="-1" hidden>
+          ✅ <strong>Mensagem enviada com sucesso!</strong> Responderemos em até 2 dias úteis.
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>&copy; 2026 Apeperia - Projeto voltado à acessibilidade e inclusão.</p>
+      <p class="pequeno">Desenvolvido com foco no conforto visual e usabilidade.</p>
+    </div>
+  </footer>
+
+  <!-- Script para funcionamento dos botões -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const botoes = document.querySelectorAll('.btn-controle');
+      const guia = document.getElementById('guia-leitura');
+
+      botoes.forEach(botao => {
+        botao.addEventListener('click', () => {
+          const texto = botao.textContent.trim().toLowerCase();
+
+          if (texto.includes('alto contraste')) {
+            const ativo = document.body.classList.toggle('alto-contraste');
+            document.body.classList.remove('modo-calmo');
+            botao.setAttribute('aria-pressed', ativo);
+            document.getElementById('btn-modo-calmo').setAttribute('aria-pressed', 'false');
+          }
+
+          if (texto.includes('modo calmo')) {
+            const ativo = document.body.classList.toggle('modo-calmo');
+            document.body.classList.remove('alto-contraste');
+            botao.setAttribute('aria-pressed', ativo);
+            document.getElementById('btn-contraste').setAttribute('aria-pressed', 'false');
+          }
+
+          if (texto.includes('aumentar fonte')) {
+            const ativo = document.body.classList.toggle('fonte-maior');
+            botao.setAttribute('aria-pressed', ativo);
+          }
+
+          if (texto.includes('reduzir movimento')) {
+            const ativo = document.body.classList.toggle('reducao-movimento');
+            botao.setAttribute('aria-pressed', ativo);
+          }
+
+          if (texto.includes('guia de leitura')) {
+            const ativo = document.body.classList.toggle('guia-ativa');
+            botao.setAttribute('aria-pressed', ativo);
+          }
+        });
+      });
+
+      // Movimento da Linha Guia de Leitura
+      document.addEventListener('mousemove', (e) => {
+        if (document.body.classList.contains('guia-ativa')) {
+          guia.style.top = `${e.clientY}px`;
+        }
+      });
+
+      // Feedback do Formulário
+      const form = document.getElementById('form-contato');
+      const msgSucesso = document.getElementById('mensagem-sucesso');
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          msgSucesso.hidden = false;
+          msgSucesso.focus();
+          form.reset();
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
